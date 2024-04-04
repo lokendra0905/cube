@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "apisauce": "^3.0.1",
+    "lodash": "^4.17.21",
+    "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.1.4"
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "eslint": "^8",
