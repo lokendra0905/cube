@@ -34,7 +34,7 @@ export const CustomerList = ({ setSelected, selected }) => {
               p={6}
               py={4}
               cursor={"pointer"}
-              bg={selected.id === customer.id ? "#e8e8e8" : "white"}
+              bg={selected?.id === customer.id ? "#e8e8e8" : "white"}
               onClick={() => setSelected(customer)}
             >
               <Text fontWeight={"bold"} fontSize={"x-large"}>
