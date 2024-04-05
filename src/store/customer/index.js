@@ -5,9 +5,10 @@ import { create } from "zustand";
 export const useCustomerStore = create((set, get) => ({
   getCustomerAction: async (payload) => {
     set({ getCustomerStatus: STATUS.FETCHING });
+    const prevData = get().customerData || [];
     const { data, ok } = await apis.getCustomerApi(payload);
     if (ok) {
-      set({ getCustomerStatus: STATUS.SUCCESS, customerData: data });
+      set({ getCustomerStatus: STATUS.SUCCESS, customerData: [...prevData, ...data] });
     } else {
       set({ getCustomerStatus: STATUS.FAILED });
     }

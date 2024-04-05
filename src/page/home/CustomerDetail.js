@@ -4,7 +4,7 @@ import { Box, Center, Grid, GridItem, Heading, Image, Spinner, Text } from "@cha
 import { map } from "lodash";
 import React, { useEffect } from "react";
 
-export const CustomerDetail = ({data}) => {
+export const CustomerDetail = ({ data }) => {
   const { getImageAction, getImageStatus, imageData } = useCustomerStore((s) => ({
     getImageAction: s.getImageAction,
     getImageStatus: s.getImageStatus,
@@ -12,19 +12,29 @@ export const CustomerDetail = ({data}) => {
   }));
 
   useEffect(() => {
-    getImageAction({ count: 6, client_id: "7UMvQO386Wa8BAv4E9SI0ALU70tmrXFweDRbAdvBe9c" });
+    setInterval(() => {
+      getImageAction({ count: 6, client_id: "7UMvQO386Wa8BAv4E9SI0ALU70tmrXFweDRbAdvBe9c" });
+    }, 10000);
   }, [getImageAction]);
 
   return (
-    <Box w={"70%"} bg={"#e8e8e8"} p={10} textAlign={"center"} maxH={'100vh'} overflowY={'scroll'}>
+    <Box
+      w={"70%"}
+      bg={"#e8e8e8"}
+      p={10}
+      textAlign={"center"}
+      maxH={"100vh"}
+      overflowY={"scroll"}
+      position={"fixed"}
+      right={0}
+      onScroll={(e) => e.stopPropagation()}
+    >
       <Box w={"70%"} m={"auto"}>
         <Heading>Customer {data.id}</Heading>
-        <Text mt={5}>
-          {data.body}
-        </Text>
+        <Text mt={5}>{data.body}</Text>
 
         {getImageStatus === STATUS.FETCHING ? (
-          <Center h={'600'}>
+          <Center h={"600"}>
             <Spinner
               thickness="4px"
               speed="0.65s"
@@ -35,9 +45,9 @@ export const CustomerDetail = ({data}) => {
           </Center>
         ) : (
           <Grid templateColumns="repeat(3, 1fr)" gap={6} mt={10}>
-            {map(imageData, (image) => {
+            {map(imageData, (image,index) => {
               return (
-                <GridItem h={300}>
+                <GridItem h={300} key={index}>
                   <Image
                     src={image.urls.small}
                     alt={image.color}
